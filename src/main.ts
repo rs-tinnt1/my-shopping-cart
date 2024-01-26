@@ -1,5 +1,11 @@
-import { createApp } from 'vue'
-import './style.css'
-import App from './App.vue'
+import { Layout } from "ant-design-vue";
+import "ant-design-vue/dist/reset.css";
+import { createApp } from "vue";
+import App from "./App.vue";
+import router from "./presentation/routes";
+import "./style.css";
 
-createApp(App).mount('#app')
+const app = createApp(App);
+app.use(Layout);
+app.use(router);
+app.mount("#app");

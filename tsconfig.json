@@ -21,11 +21,11 @@
     "noFallthroughCasesInSwitch": true,
 
     /* Import */
-    "baseUrl": ".",
-    "paths": {
-      "@/*": ["src/*"]
-    }
+    // "baseUrl": ".",
+    // "paths": {
+    //   "@/*": ["src/*"]
+    // }
   },
-  "include": ["src/**/*.d.ts", "src/**/*.ts", "src/**/*.tsx", "src/**/*.vue", "tests/**/*.ts", "tests/**/*.tsx"],
+  "include": ["src/**/*.d.ts", "src/**/*.ts", "src/**/*.tsx", "src/*.vue", "src/**/*.vue", "tests/**/*.ts", "tests/**/*.tsx"],
   "references": [{ "path": "./tsconfig.node.json" }]
 }
