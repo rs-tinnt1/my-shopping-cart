@@ -1,30 +1,36 @@
 <template>
   <a-layout-header style="display: flex; justify-content: space-between">
     <div class="h-8 w-32 m-4 ml-0 bg-gray-500 float-left">
-      <p class="text-white text-lg pl-2">Logo</p>
+      <router-link to="/">
+        <p class="text-white text-lg pl-2">Logo</p>
+      </router-link>
     </div>
     <a-menu theme="dark" mode="horizontal" :style="{ lineHeight: '64px' }">
       <router-link to="/"><a-menu-item key="1">Home</a-menu-item></router-link>
       <router-link to="/products">
         <a-menu-item key="2"> Products </a-menu-item>
       </router-link>
-      <!-- <NuxtLink v-if="userData" to="/profile">
+      <router-link to="/profile">
         <a-menu-item key="3">
           <a-badge :count="totalItems">
             <p id="cart" class="text-white text-lg font-semibold">
               <ShoppingFilled />
             </p> </a-badge
         ></a-menu-item>
-      </NuxtLink> -->
-      <router-link to="/auth/login">
-        <a-menu-item key="3"> Login </a-menu-item>
       </router-link>
+      <!-- <router-link to="/auth/login">
+        <a-menu-item key="3"> Login </a-menu-item>
+      </router-link> -->
     </a-menu>
   </a-layout-header>
 </template>
 
 <script setup lang="ts">
-import { RouterLink } from "vue-router";
+import { ShoppingFilled } from '@ant-design/icons-vue'
+import { ref } from 'vue'
+import { RouterLink } from 'vue-router'
+
+const totalItems = ref(1)
 </script>
 
 <style>

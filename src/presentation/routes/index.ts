@@ -1,11 +1,15 @@
-import VueRouter from "vue-router";
+import { RouteRecordRaw, createRouter, createWebHashHistory } from 'vue-router'
+import NotFound from '../pages/404Page.vue' // import the 404 component
+import publicRoutes from './publicRoutes'
 
-import publicRoutes from "./publicRoutes";
+const routes: RouteRecordRaw[] = [
+  ...publicRoutes,
+  { path: '/:pathMatch(.*)*', name: 'NotFound', component: NotFound } // add 404 route
+]
 
-const routes: VueRouter.RouteRecordRaw[] = [...publicRoutes];
-const router = VueRouter.createRouter({
-  // 4. Provide the history implementation to use. We are using the hash history for simplicity here.
-  history: VueRouter.createWebHashHistory(),
-  routes, // short for `routes: routes`
-});
-export default router;
+const router = createRouter({
+  history: createWebHashHistory(),
+  routes
+})
+
+export default router
