@@ -13,10 +13,11 @@
 </template>
 
 <script setup lang="ts">
-import { IProductDto } from '@/modules/dto/product.dto'
-import { productServices } from '@/modules/services'
 import { ref, watchEffect } from 'vue'
 import { useRoute } from 'vue-router'
+
+import { IProductDto } from '@/modules/product/dto'
+import { productServices } from '@/modules/product/services'
 import BasePagination from '../atoms/BasePagination.vue'
 import ProductCard from '../molecules/ProductCard.vue'
 

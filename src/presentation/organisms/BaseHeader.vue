@@ -10,7 +10,7 @@
       <router-link to="/products">
         <a-menu-item key="2"> Products </a-menu-item>
       </router-link>
-      <router-link to="/profile">
+      <router-link to="/checkout">
         <a-menu-item key="3">
           <a-badge :count="totalItems">
             <p id="cart" class="text-white text-lg font-semibold">

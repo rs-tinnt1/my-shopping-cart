@@ -10,11 +10,13 @@
   },
   "dependencies": {
     "ant-design-vue": "4.x",
+    "crypto-js": "^4.2.0",
     "pinia": "^2.1.7",
     "vue": "^3.3.11",
     "vue-router": "^4.0.13"
   },
   "devDependencies": {
+    "@types/crypto-js": "^4.2.2",
     "@types/firebase": "^3.2.1",
     "@types/vue": "^2.0.0",
     "@vitejs/plugin-vue": "^4.5.2",
