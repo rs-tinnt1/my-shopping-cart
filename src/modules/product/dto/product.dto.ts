@@ -1,12 +1,13 @@
 export interface IProductDto {
-  id: string
+  productId: string
   title: string
   description: string
   categoryId: string
   tagId: string
   price: number
-  basePrice?: number
+  basePrice: number
   image: string
-  colors: { colorId: string }[]
-  sizes: { sizeId: string }[]
+  colorId: string
+  sizeId: string
+  quantity: number
 }

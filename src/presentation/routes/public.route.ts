@@ -17,6 +17,10 @@ const publicRoutes: VueRouter.RouteRecordRaw[] = [
       {
         path: '/products/:id',
         component: () => import('../pages/ProductDetailPage.vue')
+      },
+      {
+        path: '/checkout',
+        component: () => import('../pages/CheckoutPage.vue')
       }
     ]
   }

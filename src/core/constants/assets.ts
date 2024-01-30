@@ -1,7 +1,7 @@
-import { ICategory } from '@/modules/entities/category.entity'
-import { IColor } from '@/modules/entities/color.entity'
-import { ISize } from '@/modules/entities/size.entity'
-import { ITag } from '@/modules/entities/tag.entity'
+import { ICategory } from '@/modules/product/entities/category.entity'
+import { IColor } from '@/modules/product/entities/color.entity'
+import { ISize } from '@/modules/product/entities/size.entity'
+import { ITag } from '@/modules/product/entities/tag.entity'
 
 export const COLORS: IColor[] = [
   {

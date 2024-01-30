@@ -8,8 +8,8 @@
 import { ref, watchEffect } from 'vue'
 import { useRoute } from 'vue-router'
 
-import { IProductDto } from '@/modules/dto/product.dto'
-import { productServices } from '@/modules/services'
+import { IProductDto } from '@/modules/product/dto'
+import { productServices } from '@/modules/product/services'
 import ProductDetailsSection from '../organisms/ProductDetailsSection.vue'
 
 const product = ref<IProductDto | null>(null)
@@ -22,3 +22,4 @@ watchEffect(async () => {
   }
 })
 </script>
+@/modules/product/dto/product.dto

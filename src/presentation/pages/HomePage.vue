@@ -9,7 +9,7 @@
       </p>
     </h2>
     <div class="max-w-full md:max-w-[1024px] mx-auto grid grid-cols-4 gap-5">
-      <div v-for="p in men" :key="p.id">
+      <div v-for="p in men" :key="p.productId">
         <product-card :product="p" />
       </div>
     </div>
@@ -30,8 +30,8 @@ import { onMounted, ref } from 'vue'
 import { RouterLink } from 'vue-router'
 
 import { PRODUCTS_CATEGORY } from '@/core/constants'
-import { IProductDto } from '@/modules/dto/product.dto'
-import { productServices } from '@/modules/services'
+import { IProductDto } from '@/modules/product/dto'
+import { productServices } from '@/modules/product/services'
 import CategoryCard from '../molecules/CategoryCard.vue'
 import ProductCard from '../molecules/ProductCard.vue'
 
