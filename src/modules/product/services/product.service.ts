@@ -50,7 +50,29 @@ const getProductById = async (id: string) => {
   }
 }
 
+/** get product detail by title */
+const getProductByTitle = async (term: string) => {
+  const q = query(
+    collection(db, 'product'),
+    where('title', '>=', term),
+    where('title', '<=', term + '\uf8ff')
+  )
+
+  const snapshot = await getDocs(q)
+  if (snapshot.docs) {
+    const total = snapshot.docs.map((doc) => ({
+      productId: doc.id,
+      ...doc.data()
+    })) as IProductDto[]
+    return { data: total, total: total.length }
+  } else {
+    // docSnap.data() will be undefined in this case
+    return { data: [], total: 0 }
+  }
+}
+
 export const productServices = {
   getProducts,
-  getProductById
+  getProductById,
+  getProductByTitle
 }

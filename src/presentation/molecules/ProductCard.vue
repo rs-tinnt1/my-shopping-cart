@@ -7,14 +7,13 @@
     <img :src="`${product?.image ?? product.colors[0].image}`" class="thumb" />
     <p class="font-bold text-gray-500 m-2 truncate">{{ product.title }}</p>
     <p class="font-bold text-gray-600 mt-1">{{ product.price }} VND</p>
-    <router-link :to="`/products/${product.id}`">
+    <router-link :to="`/products/${product.productId}`">
       <a-button style="margin: 0.5rem 0" type="primary" class="btn"> Detail </a-button>
     </router-link>
   </div>
 </template>
 
 <script setup lang="ts">
-import { defineProps } from 'vue'
 import { RouterLink } from 'vue-router'
 
 const { product } = defineProps(['product'])

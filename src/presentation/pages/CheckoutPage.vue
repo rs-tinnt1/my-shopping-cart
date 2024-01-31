@@ -200,7 +200,7 @@ const onClose = () => {
 
 const handleCheckout = async () => {
   message.success('Order successfully')
-  // await cartStore.orderProductInCart()
+  await cartStore.orderProductInCart()
   onClose()
 }
 </script>

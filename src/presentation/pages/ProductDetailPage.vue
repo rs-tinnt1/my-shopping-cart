@@ -5,7 +5,7 @@
 </template>
 
 <script setup lang="ts">
-import { ref, watchEffect } from 'vue'
+import { computed, ref, watch } from 'vue'
 import { useRoute } from 'vue-router'
 
 import { IProductDto } from '@/modules/product/dto'
@@ -13,13 +13,13 @@ import { productServices } from '@/modules/product/services'
 import ProductDetailsSection from '../organisms/ProductDetailsSection.vue'
 
 const product = ref<IProductDto | null>(null)
+const router = useRoute()
+const id = computed(() => router.params.id.toString())
 
 //  fetch the products
-watchEffect(async () => {
-  const { id } = useRoute().params
-  if (id) {
-    product.value = await productServices.getProductById(id.toString())
+watch(id, async (val) => {
+  if (val) {
+    product.value = await productServices.getProductById(val)
   }
 })
 </script>
-@/modules/product/dto/product.dto

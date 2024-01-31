@@ -6,7 +6,7 @@
     and add to card button
 -->
 <template>
-  <modal-add-to-cart :open="showModalAddToCard" @set-visible="setOpenDialog" />
+  <modal-add-to-cart :open="showModalAddToCard" @set-visible="setOpenDialog" :product="product" />
 
   <div class="card">
     <div class="grid grid-cols-2 gap-10">
@@ -37,15 +37,24 @@
 import { PlusCircleOutlined } from '@ant-design/icons-vue'
 import { ref } from 'vue'
 
+import { useUserStore } from '@/modules/user/store'
 import ModalAddToCart from '@/presentation/molecules/ModalAddToCart.vue'
+import { message } from 'ant-design-vue'
+import { useRouter } from 'vue-router'
 
 // eslint-disable-next-line vue/require-prop-types
 const { product } = defineProps(['product'])
 
 const showModalAddToCard = ref<boolean>(false)
+const userStore = useUserStore()
+const router = useRouter()
 
 // Handle add to cart context
 const handleClick = () => {
+  if (!userStore.userData?.userId) {
+    message.warning('Please login to continue!')
+    router.push('/login')
+  }
   showModalAddToCard.value = true
 }
 

@@ -43,9 +43,12 @@
 
 <script setup lang="ts">
 import { message } from 'ant-design-vue'
-import { defineEmits, defineProps, reactive } from 'vue'
+import { defineEmits, reactive } from 'vue'
 
 import { COLORS, SIZES } from '@/core/constants/assets'
+import { useCartStore } from '@/modules/cart/store'
+import { IInventoryDto } from '@/modules/inventory/dto'
+import { IProductDto } from '@/modules/product/dto'
 
 interface FormState {
   colorId: string
@@ -53,8 +56,9 @@ interface FormState {
   quantity: number
 }
 
-const props = defineProps<{ open: boolean }>()
+const props = defineProps<{ open: boolean; product: IProductDto }>()
 const emit = defineEmits(['set-visible'])
+const cartStore = useCartStore()
 const initFormValue: FormState = {
   colorId: COLORS[0].colorId,
   sizeId: SIZES[0].sizeId,
@@ -72,6 +76,16 @@ const handleCancel = () => {
   emit('set-visible', false)
 }
 const handleOk = async () => {
+  const inventory: IInventoryDto = {
+    ...props.product,
+    inventoryId: '',
+    colorId: form.colorId,
+    sizeId: form.sizeId,
+    quantity: form.quantity,
+    updated: new Date().toISOString()
+  }
+  console.log('TEST 1')
+  cartStore.addProduct(inventory)
   message.success('Add product successfully!')
   // reset form
   form.colorId = initFormValue.colorId

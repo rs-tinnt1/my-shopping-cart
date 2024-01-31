@@ -26,15 +26,15 @@
           </div>
           <a href="#" class="text-xs text-gray-600 hover:underline">Forget Password?</a>
           <div class="mt-6 flex justify-center">
-            <button class="btn" @click="handleLogin">Login</button>
+            <button class="bg-blue-500 hover:bg-blue-600 btn" @click="handleLogin">Login</button>
           </div>
         </div>
       </form>
       <p class="mt-8 text-xs font-light text-center text-gray-700">
         Don't have an account?
-        <NuxtLink to="/auth/register" class="font-medium text-primary-dark hover:underline">
+        <router-link to="/register" class="font-medium text-primary-dark hover:underline">
           Sign up
-        </NuxtLink>
+        </router-link>
       </p>
     </div>
   </div>
@@ -43,10 +43,15 @@
 <script setup lang="ts">
 import { message } from 'ant-design-vue'
 import { reactive } from 'vue'
+import { RouterLink, useRouter } from 'vue-router'
 
+import { useCartStore } from '@/modules/cart/store'
 import { useUserStore } from '@/modules/user/store'
 
+const router = useRouter()
+
 const { login } = useUserStore()
+const { updateCart } = useCartStore()
 const creds = reactive({
   email: '',
   password: ''
@@ -62,7 +67,14 @@ const handleLogin = async (e: Event) => {
         /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|.(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
       )
   ) {
-    await login(creds.email, creds.password)
+    const res = await login(creds.email, creds.password)
+    if (res) {
+      updateCart()
+      message.success('Login success!')
+      router.push('/')
+    } else {
+      message.error('Login failed!')
+    }
   } else {
     message.warning('Plese enter a valid email!')
   }
