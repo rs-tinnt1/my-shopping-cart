@@ -4,7 +4,7 @@
       Men
       <p class="m-0">
         <router-link to="/products?category=men">
-          <span class="text-sm text-[#12b488] font-bold">More >></span>
+          <span class="text-sm text-blue-500 hover:text-blue-600 font-bold">More >></span>
         </router-link>
       </p>
     </h2>

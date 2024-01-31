@@ -38,19 +38,20 @@ body {
 
 @layer components {
   .btn {
-      @apply bg-[#12b488] px-3 py-2 rounded-md text-sm text-white inline-block;
+      @apply px-3 py-2 rounded-md text-sm text-white inline-block;
   }
   .card {
       @apply p-3 rounded-md bg-white shadow-md h-full;
   }
-}
-
-button, [type='button'], [type='reset'], [type='submit'] {
-  @apply bg-[#12b488] px-3 py-2 rounded-md text-sm text-white inline-block;
+  
 }
 
 .ant-btn {
   display: inline-flex !important;
   align-items: center !important;
   justify-content: center !important;
+}
+
+.ant-btn-primary {
+  @apply bg-blue-500 hover:bg-blue-600;
 }

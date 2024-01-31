@@ -19,8 +19,10 @@ export const useCartStore = defineStore('cart', {
     }
   },
   actions: {
+    // add item into cart context, set to localstorage
     addProduct(product: IInventoryDto) {
       this.cartDetails.push(product)
+      localStorage.setItem('cart', JSON.stringify(this.cartDetails))
     },
     setUserId(userId: string) {
       this.userId = userId
@@ -31,11 +33,6 @@ export const useCartStore = defineStore('cart', {
       if (localCart) {
         this.cartDetails = JSON.parse(localCart) as IInventoryDto[]
       }
-    },
-    // add item into cart context, set to localstorage
-    addToCard(product: IInventoryDto) {
-      this.cartDetails.push(product)
-      localStorage.setItem('cart', JSON.stringify(this.cartDetails))
     },
     // remove item out of cart context, update localstorage
     removeCartItem(index: number) {
@@ -62,40 +59,10 @@ export const useCartStore = defineStore('cart', {
       } catch {
         return false
       }
+    },
+    async orderProductInCart() {
+      this.cartDetails = []
+      localStorage.removeItem('cart')
     }
-    // async orderProductInCart() {
-    //   const userStore = useUserStore()
-    //   try {
-    //     if (this.userId) {
-    //       const res = await useFetch('/api/order', {
-    //         method: 'POST',
-    //         body: {
-    //           order: {
-    //             address: userStore.userData?.address,
-    //             created: new Date(),
-    //             status: 'pending',
-    //             userId: this.userId
-    //           },
-    //           details: this.cartDetails.map((item) => ({
-    //             inventoryId: item.inventoryId,
-    //             quantity: item.quantity
-    //           }))
-    //         }
-    //       })
-    //       if (res.data.value?.status === 200) {
-    //         await this.getUserCart()
-    //         message.success('Create order completed successfully!')
-    //         return
-    //       }
-    //       message.error('Server Error')
-    //       return
-    //     }
-
-    //     message.error('Account Error')
-    //   } catch {
-    //     message.error('Error')
-    //     return false
-    //   }
-    // }
   }
 })

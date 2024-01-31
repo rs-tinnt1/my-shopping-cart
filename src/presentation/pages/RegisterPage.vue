@@ -37,21 +37,23 @@
             <label for="confirm" class="block text-sm text-gray-800">Confirm Password</label>
             <input
               type="password"
-              :model="form.confirm"
+              v-model="form.confirm"
               class="block w-full px-4 py-2 mt-2 text-primary bg-white border rounded-md focus:border-primary-dark focus:ring-primary focus:outline-none focus:ring focus:ring-opacity-40"
             />
           </div>
           <a href="#" class="text-xs text-gray-600 hover:underline">Forget Password?</a>
           <div class="mt-6 flex justify-center">
-            <button @click="handleRegister" class="btn">Register</button>
+            <button @click="handleRegister" class="bg-blue-500 hover:bg-blue-600 btn">
+              Register
+            </button>
           </div>
         </div>
       </form>
       <p class="mt-8 text-xs font-light text-center text-gray-700">
         I have account already?
-        <NuxtLink to="/auth/login" class="font-medium text-primary-dark hover:underline">
+        <router-link to="/login" class="font-medium text-primary-dark hover:underline">
           Login
-        </NuxtLink>
+        </router-link>
       </p>
     </div>
   </div>
@@ -60,10 +62,12 @@
 <script setup lang="ts">
 import { message } from 'ant-design-vue'
 import { reactive } from 'vue'
+import { RouterLink, useRouter } from 'vue-router'
 
 import { useUserStore } from '@/modules/user/store'
 
 const userStore = useUserStore()
+const router = useRouter()
 
 const form = reactive({
   username: '',
@@ -88,11 +92,18 @@ const handleRegister = async (e: Event) => {
     message.warning('Plese enter a valid email!')
     return
   }
+  console.log('TEST1', form)
   if (form.password !== form.confirm) {
     message.warning('Plese confirm password again!')
     return
   }
 
-  await userStore.register(form.email, form.password, form.username)
+  const res = await userStore.register(form.email, form.password, form.username)
+  if (res) {
+    message.success('Register success!')
+    router.push('/login')
+    return
+  }
+  message.error('Register failed!')
 }
 </script>

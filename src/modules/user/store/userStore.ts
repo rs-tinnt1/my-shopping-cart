@@ -1,5 +1,4 @@
 // userStore.js
-import { message } from 'ant-design-vue'
 import { defineStore } from 'pinia'
 import { useRouter } from 'vue-router'
 import { IAccountEntity, IUserEntity } from '../entities'
@@ -26,33 +25,28 @@ export const useUserStore = defineStore('user', {
       router.push('/login')
     },
     async login(email: string, password: string) {
-      const router = useRouter()
       try {
         const res = await userServices.login({ email, password })
         if (res.status == 200 && res.data) {
           this.userData = res.data.user
           this.accountData = res.data.account
-          message.success(res.message)
-          router.push('/')
-          return
+          return true
         }
-        message.error('Login failed! Plese try again!')
+
+        return false
       } catch {
-        message.error('Login failed! Plese try again!')
+        return false
       }
     },
     async register(email: string, password: string, name: string) {
-      const router = useRouter()
       try {
         const res = await userServices.register({ email, password, name })
         if (res.status == 200 && res.data) {
-          message.success(res.message)
-          router.push('/login')
-          return
+          return true
         }
-        message.error('Register failed! Plese try again!')
+        return false
       } catch {
-        message.error('Register failed! Plese try again!')
+        return false
       }
     }
   }
